@@ -1,0 +1,36 @@
+﻿<Window x:Class="TinyCqrsSample.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TinyCqrsSample.UI"
+        xmlns:model="clr-namespace:TinyCqrsSample.Core.Reporting;assembly=TinyCqrsSample.Core"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ListBox x:Name="Logs"
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Stretch"
+                 Grid.Row="0">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type model:DiaryItemDto}">
+                    <WrapPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Title}"/>
+                        <TextBlock Text="{Binding From}"/>
+                        <TextBlock Text="{Binding To}"/>
+                        <TextBlock Text="{Binding Description}"/>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <WrapPanel Grid.Row="1" Orientation="Horizontal">
+            <Button Content="Load" Click="OnLoadButtonClick"/>
+            <Button Content="EditFirstItem" Click="OnEditButtonClick"/>
+            <Button Content="Delete" Click="OnDeleteButtonClick"/>
+        </WrapPanel>
+    </Grid>
+</Window>
