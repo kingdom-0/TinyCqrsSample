@@ -26,7 +26,7 @@ namespace TinyCqrsSample.Core.Storage
 
         public IEnumerable<Event> GetEvents(Guid aggregateId)
         {
-            var events = _events.Where(e => e.AggregateId == aggregateId);
+            var events = _events.Where(e => e.AggregateId == aggregateId).ToList();
             if(!events.Any())
             {
                 throw new AggregateNotFoundException(string.Format("Aggregate with Id:{0} was not found", aggregateId));
@@ -36,20 +36,17 @@ namespace TinyCqrsSample.Core.Storage
 
         public void Save(AggregateRoot aggregateRoot)
         {
-            var uncommittedChanges = aggregateRoot.GetUncommittedChanges().ToList();
+            var uncommittedChanges = aggregateRoot.GetUncommittedChangeEvents().ToList();
             var version = aggregateRoot.Version;
             foreach(var eventInstance in uncommittedChanges)
             {
                 version++;
-                if (version > 2)
+                if (version > 0 && version % 3 == 0)
                 {
-                    if(version % 3 == 0)
-                    {
-                        var originator = (IOriginator)aggregateRoot;
-                        var memento = originator.GetMemento();
-                        memento.Version = version;
-                        SaveMemento(memento);
-                    }
+                    var originator = (IOriginator)aggregateRoot;
+                    var memento = originator.GetMemento();
+                    memento.Version = version;
+                    SaveMemento(memento);
                 }
                 eventInstance.Version = version;
                 _events.Add(eventInstance);

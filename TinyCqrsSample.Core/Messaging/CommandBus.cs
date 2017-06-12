@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TinyCqrsSample.Core.Commands;
+﻿using TinyCqrsSample.Core.Commands;
 using TinyCqrsSample.Core.Exceptions;
 using TinyCqrsSample.Core.Utils;
 
@@ -20,7 +15,7 @@ namespace TinyCqrsSample.Core.Messaging
 
         public void Send<T>(T command) where T : Command
         {
-            var handler = _commandHandlerFactory.GetHandler<T>();
+            var handler = _commandHandlerFactory.GetHandlers<T>();
             if(handler != null)
             {
                 handler.Execute(command);

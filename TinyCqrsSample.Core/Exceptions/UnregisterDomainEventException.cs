@@ -1,16 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TinyCqrsSample.Core.Exceptions
 {
     public class UnregisterDomainEventException : Exception
     {
+        public UnregisterDomainEventException()
+        {
+            
+        }
+
         public UnregisterDomainEventException(string message) : base(message)
         {
 
+        }
+
+        public UnregisterDomainEventException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+            
         }
     }
 }

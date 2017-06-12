@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using TinyCqrsSample.Core.Events;
 
 namespace TinyCqrsSample.Core.Domain
 {
     public interface IEventProvider
     {
-        void LoadsFromHistory(IEnumerable<Event> history);
+        void LoadEventsFromHistory(IList<Event> historyEvents);
 
-        IEnumerable<Event> GetUncommittedChanges();
+        IList<Event> GetUncommittedChangeEvents();
     }
 }

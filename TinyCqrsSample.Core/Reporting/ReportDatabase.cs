@@ -1,33 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TinyCqrsSample.Core.Reporting
 {
     public class ReportDatabase:IReportDatabase
     {
-        private static List<DiaryItemDto> items = new List<DiaryItemDto>();
+        private static readonly List<DiaryItemDto> Items = new List<DiaryItemDto>();
 
         public DiaryItemDto GetById(Guid id)
         {
-            return items.Where(d => d.Id == id).FirstOrDefault();
+            return Items.FirstOrDefault(d => d.Id == id);
         }
 
         public void Add(DiaryItemDto item)
         {
-            items.Add(item);
+            Items.Add(item);
         }
 
         public void Delete(Guid id)
         {
-            items.RemoveAll(d => d.Id == id);
+            Items.RemoveAll(d => d.Id == id);
         }
 
         public List<DiaryItemDto> GetItems()
         {
-            return items;
+            return Items;
         }
     }
 }

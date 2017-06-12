@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TinyCqrsSample.Core.Events;
 using TinyCqrsSample.Core.Utils;
 
@@ -23,7 +21,7 @@ namespace TinyCqrsSample.Core.Domain
             _changes = new List<Event>();
         }
 
-        public IEnumerable<Event> GetUncommittedChanges()
+        public IList<Event> GetUncommittedChangeEvents()
         {
             return _changes;
         }
@@ -33,14 +31,14 @@ namespace TinyCqrsSample.Core.Domain
             _changes.Clear();
         }
 
-        public void LoadsFromHistory(IEnumerable<Event> history)
+        public void LoadEventsFromHistory(IList<Event> historyEvents)
         {
-            foreach(var e in history)
+            foreach(var eventInstance in historyEvents)
             {
-                ApplyChange(e, false);
+                ApplyChange(eventInstance, false);
             }
 
-            Version = history.Last().Version;
+            Version = historyEvents.Last().Version;
             EventVersion = Version;
         }
 

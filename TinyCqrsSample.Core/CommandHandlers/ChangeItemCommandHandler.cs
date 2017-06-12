@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TinyCqrsSample.Core.Commands;
 using TinyCqrsSample.Core.Domain;
 using TinyCqrsSample.Core.Storage;
@@ -29,11 +25,11 @@ namespace TinyCqrsSample.Core.CommandHandlers
                 throw new InvalidOperationException("Repository is not initialized.");
             }
             var aggregate = _repository.GetById(command.Id);
-            if(aggregate.Title != command.Title)
+            if(!string.Equals(aggregate.Title, command.Title))
             {
                 aggregate.ChangeTitle(command.Title);
             }
-            if(aggregate.Description != command.Description)
+            if(!string.Equals(aggregate.Description, command.Description))
             {
                 aggregate.ChangeDescription(command.Description);
             }

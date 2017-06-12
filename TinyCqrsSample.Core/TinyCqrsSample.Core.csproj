@@ -89,7 +89,6 @@
     <Compile Include="Storage\InMemoryEventStorage.cs" />
     <Compile Include="Storage\IRepository.cs" />
     <Compile Include="Storage\Memento\IOriginator.cs" />
-    <Compile Include="Storage\Memento\Memento.cs" />
     <Compile Include="Storage\Repository.cs" />
     <Compile Include="Utils\Converter.cs" />
     <Compile Include="Utils\ICommandHandlerFactory.cs" />
